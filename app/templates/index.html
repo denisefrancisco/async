@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Hello, {{ user.nickname }}!</h1>
+	{% if async_calls %}
+	{% for call in async_calls%}
+	<div><p>{{ call.task.sleep }} is sleeping for {{ call.time }}</p></div>
+	{% endfor %}
+	{% else %} 
+	<div><p> No information! </p></div>
+	{% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Create New Asynchronous Task</h1>
+	<h2>Current List of Tasks</h2>
+	{% for task in tasks%}
+	<ul class = "navigation">
+		<li><a href='/tasks/{{task.id}}'> Call {{ task.id }}</a></li>
+	</ul>
+	{% endfor %}
+	<form action="" method="post" name="task">
+		<!-- form.hidden_tag will get replaced with a hidden field that
+		implements the CSRF prevention that we enabled in the configuration. -->
+		{{ form.hidden_tag() }}
+		<p>
+			Please enter amount of time for sleep (in seconds):<br>
+			<!-- create form for user to input answer. -->
+			{{ form.numberOfSeconds(size=80) }}<br>
+			{% for error in form.numberOfSeconds.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}<br>
+		</p>
+		<p><input type="submit" value="Create Task"></p>
+	</form>
+{% endblock %}

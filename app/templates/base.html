@@ -1,0 +1,25 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Amadeus Task!</title>
+    {% endif %}
+  </head>
+  <body>
+    <div><a href="/tasks">Home</a></div>
+    <hr>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <!-- this block content part is used to define place where
+    the derived templates can insert themselves. -->
+    {% block content %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Status for Call {{id}}</h1>
+	{% for task in tasks%}
+		{% if task.id == id %}
+			{% if task.status == 'SUCCESS' %}
+				Status: Finished
+			{% else %}
+				Status: Running
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+{% endblock %}
