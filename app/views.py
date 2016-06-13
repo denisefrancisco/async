@@ -4,8 +4,6 @@ from forms import TaskForm
 from flask import render_template, flash, redirect, session, url_for, request,g
 from models import Task
 
-#@myapp.route('/')
-
 @myapp.route('/tasks', methods = ['GET','POST'])
 def tasks():
 	# imported our TaskForm class, instantiated an object from it,
@@ -15,7 +13,7 @@ def tasks():
 	# for task in tasks:
 	# 	db.session.delete(task)
 	# db.session.commit()
-
+	
 	#print "REQUEST HUI: ",request.form['numberOfSeconds']
 	if request.method == 'POST' and form.validate_on_submit():
 		flash('Created Async Task!')
@@ -41,7 +39,6 @@ def tasks():
 def specific_task(id):
 	tasks = Task.query.all()
 	for task in tasks:
-		# task.status = AsyncResult(task.key).status
 		task.status = celery.AsyncResult(task.key).status
 		print task.status
 	return render_template('status.html',
