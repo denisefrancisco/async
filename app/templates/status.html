@@ -3,10 +3,11 @@
 	<h1>Status for Call {{id}}</h1>
 	{% for task in tasks%}
 		{% if task.id == id %}
+			Sleep for {{ task.time }} seconds..<br>
 			{% if task.status == 'SUCCESS' %}
-				Status: Finished
+				<b>Status:</b> Finished
 			{% else %}
-				Status: Running
+				<b>Status:</b> Running
 			{% endif %}
 		{% endif %}
 	{% endfor %}

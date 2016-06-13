@@ -2,11 +2,15 @@
 {% block content %}
 	<h1>Create New Asynchronous Task</h1>
 	<h2>Current List of Tasks</h2>
-	{% for task in tasks%}
-	<ul class = "navigation">
-		<li><a href='/tasks/{{task.id}}'> Call {{ task.id }}</a></li>
-	</ul>
-	{% endfor %}
+	{% if not tasks %}
+		There are no asynchronous calls being made
+	{% else %}
+		{% for task in tasks%}
+			<ul class = "navigation">
+				<li><a href='/tasks/{{task.id}}'> Call {{ task.id }}</a></li>
+			</ul>
+		{% endfor %}
+	{% endif %}
 	<form action="" method="post" name="task">
 		<!-- form.hidden_tag will get replaced with a hidden field that
 		implements the CSRF prevention that we enabled in the configuration. -->

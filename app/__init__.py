@@ -4,24 +4,24 @@
 from flask import Flask
 from celery import Celery
 from flask.ext.sqlalchemy import SQLAlchemy
-# from tasks import *
-#from app.celery import start_sleep
 import time
 
+#Flask app initialization
 myapp = Flask(__name__)
 myapp.config.from_object('config')
 myapp.config.update(
+	#messaging broker
     CELERY_BROKER_URL='amqp://guest@localhost:5672//',
+    #allow to save results of task states
     CELERY_RESULT_BACKEND='amqp',
-    CELERY_RESULT_PERSISTENT = True
     )
 
+#function to create Celery object instance
 def make_celery(app):
     celery = Celery(app.import_name, backend=app.config['CELERY_RESULT_BACKEND'],
                     broker=app.config['CELERY_BROKER_URL'])
     celery.conf.update(app.config)
     return celery
-
 
 #initializing celery
 celery = make_celery(myapp)
